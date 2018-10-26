@@ -30,8 +30,8 @@ void list_add_back(const int n, node_t** const node) {
     (*node) = init;
 }
 
-int list_get(const int n, node_t** const node) {
-    node_t* iter = (*node);
+int list_get(const int n, node_t* const node) {
+    node_t* iter = node;
     int i;
     if (n < 0)
         return 0;
@@ -51,17 +51,44 @@ void list_free(node_t** const node) {
     }
 }
 
+int list_length(node_t* const node) {
+    node_t* iter = node;
+    int i = 0;
+    while(iter != NULL) {
+        i++;
+        iter = iter->next;
+    }
+    return i;
+}
+
+node_t* list_node_at(const int n, node_t* const node) {
+    node_t* iter = node;
+    int i = 0;
+    while(iter != NULL) {
+        i++;
+        if (i == n)
+            return iter;
+        iter = iter->next;
+    }
+    return NULL;
+}
+
+int list_sum(node_t* const node) {
+    node_t* iter = node;
+    int sum = 0;
+    while(iter != NULL) {
+        sum += iter->value;
+        iter = iter->next;
+    }
+    return sum;
+}
 
 int main(){
-    node_t* test = node_create(7);
-    printf("%d\n", test->value);
-    list_add_front(10, &test);
-    printf("%d\n", test->value);
-    list_add_back(3, &test);
-    printf("%d\n", list_get(2, &test));
-    printf("%d\n", test->value);
-    list_free(&test);
-    printf("%d\n", test==NULL);
+    node_t* node = node_create(2);
+    list_add_front(1, &node);
+    list_add_back(3, &node);
+    printf("%d\n", node->value);
+    printf("%d\n", list_sum(node));
     return 0;
 }
 
