@@ -5,8 +5,21 @@ int square(int x) {
     return x*x;
 }
 
+int soma(int a, int b) {
+    return a+b;
+}
+
+int max(int a, int b) {
+    return (a > b)?a:b;
+}
+
+int min(int a, int b) {
+    return (a > b)?b:a;
+}
+
 int main() {
     int i;
+    int fold_res;
     node_t* head = node_create(1);
     node_t* nhead;
     for (i = 2; i < 11; i++)
@@ -14,7 +27,7 @@ int main() {
     list_print(head);
     nhead = map( &square, head);
     list_print(nhead);
+    fold_res = foldl(&soma, 0, head);
+    printf("foldl result: %d\n", fold_res);
     return 0;
 }
-
-

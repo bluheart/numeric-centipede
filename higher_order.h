@@ -13,4 +13,14 @@ node_t* map(int (*func)(int), node_t* const head) {
     return res_head;
 }
 
- 
+int foldl(int (*func)(int, int), int acc, node_t* const head) {
+    if (head == NULL)
+        return 0;
+    node_t* iter = head;
+    while (iter != NULL) {
+        acc = func(acc, iter->value);
+        iter = iter->next;
+    }
+    return acc;
+}
+
