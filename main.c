@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include "list.h"
 #include "higher_order.h"
 
 int square(int x) {
     return x*x;
 }
 
-int soma(int a, int b) {
+int sum(int a, int b) {
     return a+b;
 }
 
@@ -27,7 +28,9 @@ int main() {
     list_print(head);
     nhead = map( &square, head);
     list_print(nhead);
-    fold_res = foldl(&soma, 0, head);
+    fold_res = foldl(&sum, 0, head);
     printf("foldl result: %d\n", fold_res);
+    list_free(&head);
+    list_free(&nhead);
     return 0;
 }
