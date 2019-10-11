@@ -44,6 +44,7 @@ int main() {
     list_print(head);
     fold_res = foldl(head, &sum, 0);
     printf("foldl result: %d\n", fold_res);
+    list_free(&filter_head);
     list_free(&head);
     list_free(&nhead);
     return 0;
