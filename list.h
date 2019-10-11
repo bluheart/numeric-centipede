@@ -24,4 +24,4 @@ int list_sum(node_t* const node);
 
 void list_print(node_t* const node);
 
-#endif
+#endif /* __LIST_H */

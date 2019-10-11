@@ -15,6 +15,16 @@ node_t* map(int (*func)(int), node_t* const head) {
     return res_head;
 }
 
+void map_mut(int (*func)(int), node_t* const head) {
+    if (head == NULL)
+        return;
+    node_t* iter = head;
+    while (iter != NULL) {
+        iter->value = func(iter->value);
+        iter = iter->next;
+    }
+}
+
 int foldl(int (*func)(int, int), int acc, node_t* const head) {
     if (head == NULL)
         return 0;
@@ -24,4 +34,14 @@ int foldl(int (*func)(int, int), int acc, node_t* const head) {
         iter = iter->next;
     }
     return acc;
+}
+
+void foreach(void (*func)(int), node_t* const head) {
+  if (head == NULL)
+    return;
+  node_t* iter = head;
+  while (iter != NULL) {
+    func(iter->value);
+    iter = iter->next;
+  }
 }

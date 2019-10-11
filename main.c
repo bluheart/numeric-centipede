@@ -6,6 +6,10 @@ int square(int x) {
     return x*x;
 }
 
+void square_print(int x) {
+  printf("the square of %d is %d\n", x, x*x);
+}
+
 int sum(int a, int b) {
     return a+b;
 }
@@ -26,8 +30,12 @@ int main() {
     for (i = 2; i < 11; i++)
         list_add_back(i, &head);
     list_print(head);
+    foreach(&square_print, head);
     nhead = map( &square, head);
     list_print(nhead);
+    list_print(head);
+    map_mut(&square, head);
+    list_print(head);
     fold_res = foldl(&sum, 0, head);
     printf("foldl result: %d\n", fold_res);
     list_free(&head);
