@@ -1,6 +1,4 @@
 #include <stdlib.h>
-#include <stdbool.h>
-#include "list.h"
 #include "higher_order.h"
 
 node_t* map(node_t* const head, int (*func)(int)) {
@@ -24,6 +22,21 @@ void map_mut(node_t* const head, int (*func)(int)) {
         iter->value = func(iter->value);
         iter = iter->next;
     }
+}
+
+node_t* filter(node_t* const head, bool (*func)(int)) {
+    if (head == NULL)
+        return NULL;
+    node_t* iter = head;
+    node_t* res_head = node_create(func(head->value));
+    iter = iter->next;
+    while (iter != NULL) {
+        if (func(iter->value)) {
+          list_add_back(iter->value, &res_head);
+        }
+        iter = iter->next;
+    }
+    return res_head;
 }
 
 int foldl(node_t* const head, int (*func)(int, int), int acc) {
