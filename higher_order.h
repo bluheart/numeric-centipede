@@ -1,12 +1,12 @@
 #ifndef __HIGHER_ORDER_H
 #define __HIGHER_ORDER_H
 
-node_t* map(int (*func)(int), node_t* const head);
+node_t* map(node_t* const head, int (*func)(int));
 
-void map_mut(int (*func)(int), node_t* const head);
+void map_mut(node_t* const head, int (*func)(int));
 
-int foldl(int (*func)(int, int), int acc, node_t* const head);
+int foldl(node_t* const head, int (*func)(int, int), int acc);
 
-void foreach(void (*func)(int), node_t* const head);
+void foreach(node_t* const head, void (*func)(int));
 
 #endif /* __HIGHER_ORDER_H */

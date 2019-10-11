@@ -30,13 +30,13 @@ int main() {
     for (i = 2; i < 11; i++)
         list_add_back(i, &head);
     list_print(head);
-    foreach(&square_print, head);
-    nhead = map( &square, head);
+    foreach(head, &square_print);
+    nhead = map(head, &square);
     list_print(nhead);
     list_print(head);
-    map_mut(&square, head);
+    map_mut(head, &square);
     list_print(head);
-    fold_res = foldl(&sum, 0, head);
+    fold_res = foldl(head, &sum, 0);
     printf("foldl result: %d\n", fold_res);
     list_free(&head);
     list_free(&nhead);
