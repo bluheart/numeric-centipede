@@ -15,26 +15,22 @@ void list_add_front(const int n, node_t** const node) {
     (*node) = head;
 }
 
-void list_add_back(const int n, node_t** const node) {
-    node_t* tail = node_create(n);
-    node_t* init = (*node);
+void list_add_back(const int n, node_t** node) {
+    node_t* last = node_create(n);
     while ((*node)->next != NULL)
-        (*node) = (*node)->next;
-    (*node)->next = tail;
-    (*node) = init;
+        node = &((*node)->next);
+    (*node)->next = last;
 }
 
-int list_get(const int n, node_t* const node) {
-    node_t* iter = node;
-    int i;
+int list_get(const int n, node_t** node) {
     if (n < 0)
         return 0;
-    for (i = 0; i < n; i++) {
-        iter = iter->next;
-        if (iter == NULL)
+    for (int i = 0; i < n; i++) {
+        node = &((*node)->next);
+        if (*node == NULL)
             return 0;
     }
-    return (iter->value);
+    return ((*node)->value);
 }
 
 void list_free(node_t** const node) {
@@ -45,43 +41,39 @@ void list_free(node_t** const node) {
     }
 }
 
-int list_length(node_t* const node) {
-    node_t* iter = node;
+int list_length(node_t** node) {
     int i = 0;
-    while(iter != NULL) {
+    while((*node) != NULL) {
         i++;
-        iter = iter->next;
+        node = &((*node)->next);
     }
     return i;
 }
 
-node_t* list_node_at(const int n, node_t* const node) {
-    node_t* iter = node;
+node_t* list_node_at(const int n, node_t** node) {
     int i = 0;
-    while(iter != NULL) {
+    while((*node) != NULL) {
         i++;
         if (i == n)
-            return iter;
-        iter = iter->next;
+            return (*node);
+        node = &((*node)->next);
     }
     return NULL;
 }
 
-int list_sum(node_t* const node) {
-    node_t* iter = node;
+int list_sum(node_t** node) {
     int sum = 0;
-    while(iter != NULL) {
-        sum += iter->value;
-        iter = iter->next;
+    while((*node) != NULL) {
+        sum += (*node)->value;
+        node = &((*node)->next);
     }
     return sum;
 }
 
-void list_print(node_t* const node) {
-    node_t* iter = node;
-    while(iter != NULL) {
-        printf("%d ", iter->value);
-        iter = iter->next;
+void list_print(node_t** node) {
+    while((*node) != NULL) {
+        printf("%d ", (*node)->value);
+        node = &((*node)->next);
     }
     puts("");
 }
