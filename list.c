@@ -17,8 +17,7 @@ void list_add_front(const int n, node_t** const node) {
 
 void list_add_back(const int n, node_t** node) {
     node_t* last = node_create(n);
-    while ((*node)->next != NULL)
-        node = &((*node)->next);
+    for (;(*node)->next; node = &((*node)->next));
     (*node)->next = last;
 }
 
@@ -33,7 +32,7 @@ int list_get(const int n, node_t** node) {
     return ((*node)->value);
 }
 
-void list_free(node_t** const node) {
+void list_free(node_t** node) {
     node_t* temp;
     while ((temp = (*node)) != NULL) {
         (*node) = (*node)->next;
@@ -43,17 +42,12 @@ void list_free(node_t** const node) {
 
 int list_length(node_t** node) {
     int i = 0;
-    while((*node) != NULL) {
-        i++;
-        node = &((*node)->next);
-    }
+    for (; *node; i++, node = &((*node)->next));
     return i;
 }
 
 node_t* list_node_at(const int n, node_t** node) {
-    int i = 0;
-    while((*node) != NULL) {
-        i++;
+    for(int i = 0; *node; i++) {
         if (i == n)
             return (*node);
         node = &((*node)->next);
@@ -63,17 +57,12 @@ node_t* list_node_at(const int n, node_t** node) {
 
 int list_sum(node_t** node) {
     int sum = 0;
-    while((*node) != NULL) {
-        sum += (*node)->value;
-        node = &((*node)->next);
-    }
+    for (;*node; sum += (*node)->value,node = &((*node)->next));
     return sum;
 }
 
 void list_print(node_t** node) {
-    while((*node) != NULL) {
+    for (;*node; node = &((*node)->next))
         printf("%d ", (*node)->value);
-        node = &((*node)->next);
-    }
     puts("");
 }
